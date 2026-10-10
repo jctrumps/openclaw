@@ -1,0 +1,19 @@
+# Copy to terraform.tfvars (ignored by Git); replace ALL example values.
+# Never commit real addresses, provider secrets, or your SSH public key.
+proxmox_endpoint = "https://192.0.2.10:8006/"
+proxmox_insecure = true # Lab self-signed PVE certificate ONLY
+node_name         = "pve-example-01"
+template_vm_id    = 9000
+vm_id             = 2100
+vm_name           = "openclaw-01"
+bridge            = "vmbr0"
+datastore_id      = "local-lvm"
+cpu_cores         = 4
+memory_mb         = 8192
+disk_size_gb      = 64
+# For DHCP use ipv4_address = null, ipv4_gateway = null, and working VM DNS.
+ipv4_address      = "192.0.2.55/24"
+ipv4_gateway      = "192.0.2.1"
+ssh_username      = "ubuntu"
+ssh_public_key = "ssh-ed25519 AAAA_REPLACE_WITH_CONTENTS_OF_PUBLIC_KEY openclaw-01"
+ssh_private_key_file = "/home/YOUR_LINUX_USERNAME/.ssh/openclaw_01_ed25519"

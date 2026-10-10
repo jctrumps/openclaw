@@ -1,0 +1,29 @@
+name: Static repository validation
+on:
+  push:
+  pull_request:
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax and static safety guards
+        run: ./scripts/verify-local.sh
+      - name: Public repository content audit
+        run: python3 scripts/public-audit.py
+      - name: Check ignored secrets are not tracked
+        run: |
+          if git ls-files | grep -E '(^|/)(terraform\.tfvars|terraform\.tfstate|hosts\.ini$|\.env$|.*vault.*\.yml$|.*\.pem$|id_ed25519)'; then
+            echo 'Sensitive file path tracked'; exit 1
+          fi
+          echo 'No obvious local secret filenames tracked.'
+      - name: Validate YAML parsing
+        run: |
+          python3 -m pip install --user pyyaml
+          python3 - <<'PY'
+          from pathlib import Path
+          import yaml
+          for name in ['ansible/site.yml','ansible/requirements.yml','ansible/group_vars/all.yml','.github/workflows/validate.yml']:
+              with open(name) as f: yaml.safe_load(f)
+              print('OK', name)
+          PY

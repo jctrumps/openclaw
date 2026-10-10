@@ -1,0 +1,9 @@
+---
+# Copy to local.yml ONLY if changing deployment defaults.
+# local.yml is Git-ignored. Do not put tunnel tokens here.
+# REQUIRED before public routing: set a hostname under a domain you own.
+# The example.com value is deliberately non-operational for actual public routing.
+openclaw_public_origin: https://openclaw.example.com
+# Recommended: pin a tested release after first successful deploy, e.g.
+# openclaw_image: ghcr.io/openclaw/openclaw:2026.9.3
+openclaw_timezone: Etc/UTC

@@ -1,0 +1,12 @@
+---
+# Non-secret defaults; replace with ignored group_vars/local.yml if desired.
+openclaw_app_dir: /opt/openclaw
+openclaw_data_dir: /srv/openclaw
+openclaw_image: ghcr.io/openclaw/openclaw:latest
+openclaw_listen_port: 18789
+# Placeholder only. Override in ignored group_vars/local.yml before deployment.
+openclaw_public_origin: https://openclaw.example.com
+openclaw_timezone: Etc/UTC
+openclaw_os_user: ubuntu
+openclaw_ssh_port: 22
+# No Cloudflare token, config, service, or provisioning is managed here.
